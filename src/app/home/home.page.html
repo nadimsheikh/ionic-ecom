@@ -22,104 +22,27 @@
 
 <ion-content>
 
-  <ion-segment scrollable>
-    <ion-segment-button>
-      <ion-label>Men</ion-label>
-    </ion-segment-button>
-    <ion-segment-button>
-      <ion-label>Women</ion-label>
-    </ion-segment-button>
-    <ion-segment-button>
-      <ion-label>Children</ion-label>
+  <ion-segment scrollable *ngIf="types?.length != 0">
+    <ion-segment-button *ngFor="let type of types">
+      <ion-label>{{type.name}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 
 
   <ion-grid>
 
-    <ion-row>
+    <ion-row *ngIf="products?.length != 0">
 
-      <ion-col size="6">
+      <ion-col size="6" *ngFor="let product of products">
         <ion-card>
           <ion-card-header>
             <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Card Title</ion-card-title>
+            <ion-card-title>{{product.name}}</ion-card-title>
           </ion-card-header>
 
           <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Card Title</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Card Title</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Card Title</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Card Title</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Card Title</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Card Title</ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile
+            <p>{{product.price}}</p>
+              <p>{{product.description}}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
