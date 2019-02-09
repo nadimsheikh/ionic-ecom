@@ -22,6 +22,10 @@ export class HomePage {
     this.getProducts();
   }
 
+  typeChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
+
   getTypes() {
     this.typeService.list(this.filter).subscribe(
       response => {

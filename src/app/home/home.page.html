@@ -5,7 +5,7 @@
     </ion-buttons>
 
     <ion-title>
-      Home Page
+      Ionic Ecom
     </ion-title>
 
     <ion-buttons slot="primary">
@@ -15,6 +15,9 @@
       <ion-button (click)="goToSearch()">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
     </ion-buttons>
 
   </ion-toolbar>
@@ -22,7 +25,7 @@
 
 <ion-content>
 
-  <ion-segment scrollable *ngIf="types?.length != 0">
+  <ion-segment scrollable *ngIf="types?.length != 0" (ionChange)="typeChanged($event)">
     <ion-segment-button *ngFor="let type of types">
       <ion-label>{{type.name}}</ion-label>
     </ion-segment-button>
@@ -51,5 +54,19 @@
   </ion-grid>
 
 
+<!-- fab placed in the center of the content with a list on each side -->
+<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="share"></ion-icon>
+    </ion-fab-button>
+    
+    
+    <ion-fab-list side="end">
+        <ion-fab-button><ion-icon name="logo-instagram"></ion-icon></ion-fab-button>
+        <ion-fab-button><ion-icon name="logo-facebook"></ion-icon></ion-fab-button>
+        <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
+      <ion-fab-button><ion-icon name="logo-twitter"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>

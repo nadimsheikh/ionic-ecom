@@ -16,10 +16,45 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
+      title: 'Products',
       url: '/list',
       icon: 'list'
-    }
+    },
+    {
+      title: 'My Account',
+      url: '/list',
+      icon: 'person'
+    },
+    {
+      title: 'Notifications',
+      url: '/list',
+      icon: 'notifications'
+    },
+    {
+      title: 'My Cart',
+      url: '/list',
+      icon: 'cart'
+    },
+    {
+      title: 'My Wishlist',
+      url: '/list',
+      icon: 'heart'
+    },
+    {
+      title: 'My Orders',
+      url: '/list',
+      icon: 'basket'
+    },
+    {
+      title: 'Contact',
+      url: '/list',
+      icon: 'contact'
+    },
+    {
+      title: 'Settings',
+      url: '/list',
+      icon: 'settings'
+    },
   ];
 
   constructor(
