@@ -4,6 +4,9 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { TypeService } from './provider/productModule/type/type.service';
+import { InformationService } from './provider/infoModule/information/information.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -14,11 +17,6 @@ export class AppComponent {
       title: 'Home',
       url: '/home',
       icon: 'home'
-    },
-    {
-      title: 'Products',
-      url: '/list',
-      icon: 'list'
     },
     {
       title: 'My Account',
@@ -57,16 +55,24 @@ export class AppComponent {
     },
   ];
 
-  public informations;
-  public types;
-  public categories;
+  public informations: any[] = [];
+  public types: any[] = [];
+  public categories: any[] = [];
+
+  public message;
+  public messageTitle;
+  public filter: any[] = [];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private typeService: TypeService,
+    private infoService: InformationService,
   ) {
     this.initializeApp();
+    this.getTypes();
+    this.getInfo();
   }
 
   initializeApp() {
@@ -74,5 +80,57 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  getTypes() {
+    this.typeService.list(this.filter).subscribe(
+      response => {
+        if (!response.status) {
+          this.message = response.error;
+          this.messageTitle = 'Warning!';
+        } else {
+          this.message = response.message;
+          this.messageTitle = 'Sucess!';
+          response.data.forEach(element => {
+            this.types.push(
+              {
+                title: element.name,
+                image: element.image,
+                url: ''
+              }
+            );
+          });
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  getInfo() {
+    this.infoService.list(this.filter).subscribe(
+      response => {
+        if (!response.status) {
+          this.message = response.error;
+          this.messageTitle = 'Warning!';
+        } else {
+          this.message = response.message;
+          this.messageTitle = 'Sucess!';
+          response.data.forEach(element => {
+            this.informations.push(
+              {
+                title: element.name,
+                image: element.image,
+                url: ''
+              }
+            );
+          });
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 }

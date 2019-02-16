@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TypeService } from "../provider/productModule/type/type.service";
-import { ProductService } from "../provider/productModule/product/product.service";
+import { TypeService } from '../provider/productModule/type/type.service';
+import { ProductService } from '../provider/productModule/product/product.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,7 +12,7 @@ export class HomePage {
   public messageTitle;
   public products;
   public types;
-  public filter:any[]=[];
+  public filter: any[] = [];
 
   constructor(
     private typeService: TypeService,
@@ -32,10 +32,10 @@ export class HomePage {
         // console.log(response);
         if (!response.status) {
           this.message = response.error;
-          this.messageTitle = "Warning!";
+          this.messageTitle = 'Warning!';
         } else {
           this.message = response.message;
-          this.messageTitle = "Sucess!";
+          this.messageTitle = 'Sucess!';
           this.types = response.data;
         }
       },
@@ -51,10 +51,10 @@ export class HomePage {
         // console.log(response);
         if (!response.status) {
           this.message = response.error;
-          this.messageTitle = "Warning!";
+          this.messageTitle = 'Warning!';
         } else {
           this.message = response.message;
-          this.messageTitle = "Sucess!";
+          this.messageTitle = 'Sucess!';
           this.products = response.data;
         }
       },
