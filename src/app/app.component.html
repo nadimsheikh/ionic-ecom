@@ -9,19 +9,43 @@
     <ion-content>
       <ion-list>
 
-        <ion-item-divider>
+        <ion-item-divider (click)="showTypeMenu()">
           <ion-label>
-            Types
+            Shop by category
           </ion-label>
+          <ion-icon slot="end" name="{{showTypeMenuIcon}}"></ion-icon>
         </ion-item-divider>
 
-        <ion-menu-toggle auto-hide="false" *ngFor="let type of types">
-          <ion-item [routerDirection]="'root'" [routerLink]="[type.url]">
-            <ion-label>
-              {{type.title}}
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+        <div *ngIf="showType">
+          <div *ngFor="let type of types">
+            <ion-item (click)="showTypeCategoryMenu(type)">
+              <ion-label>
+                <ion-menu-toggle>
+                  {{type.title}}
+                </ion-menu-toggle>
+              </ion-label>
+              <div *ngIf="type.categories.length">
+                <ion-icon slot="end" name="{{type.showIcon}}"></ion-icon>
+              </div>
+            </ion-item>
+            <div *ngIf="type.show">
+              <ion-menu-toggle auto-hide="false" *ngFor="let category of type.categories">
+                <ion-item [routerDirection]="'root'" [routerLink]="[category.url]">
+                  <ion-label slot="start">
+                    {{category.title}}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </div>
+
+          </div>
+        </div>
+
+        <ion-item-divider>
+          <ion-label>
+            Menu
+          </ion-label>
+        </ion-item-divider>
 
         <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
           <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
@@ -32,22 +56,36 @@
           </ion-item>
         </ion-menu-toggle>
 
-
-
-
         <ion-item-divider>
           <ion-label>
-            Information
+            My Account
           </ion-label>
         </ion-item-divider>
 
-        <ion-menu-toggle auto-hide="false" *ngFor="let info of informations">
-          <ion-item [routerDirection]="'root'" [routerLink]="[info.url]">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of accountMenu">
+          <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+            <ion-icon slot="start" [name]="p.icon"></ion-icon>
             <ion-label>
-              {{info.title}}
+              {{p.title}}
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
+
+        <ion-item-divider (click)="showInfoMenu()">
+          <ion-label slot="start">
+            Information
+          </ion-label>
+          <ion-icon slot="end" name="{{showInfoMenuIcon}}"></ion-icon>
+        </ion-item-divider>
+        <div *ngIf="showInfo">
+          <ion-menu-toggle auto-hide="false" *ngFor="let info of informations">
+            <ion-item [routerDirection]="'root'" [routerLink]="[info.url]">
+              <ion-label>
+                {{info.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
 
       </ion-list>
     </ion-content>

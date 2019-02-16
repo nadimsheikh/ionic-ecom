@@ -46,6 +46,37 @@ export class TypeService {
     );
   }
 
+  public menu(data: any) {
+    this.formData = new FormData();
+
+    if (data.draw) {
+      this.formData.append('draw', data.draw);
+    }
+
+    if (data.length) {
+      this.formData.append('length', data.length);
+    }
+
+    if (data.start) {
+      this.formData.append('start', data.start);
+    }
+
+    if (data.search) {
+      this.formData.append('search[value]', data.search.value);
+    }
+
+    if (data.order) {
+      this.formData.append('order[0][column]', data.order[0].column);
+      this.formData.append('order[0][dir]', data.order[0].dir);
+    }
+
+    this.url = `${this.configService.url}common/types/menu`;
+    return this.http.post<any>(this.url, this.formData).pipe(
+      // retry(1), // retry a failed request up to 3 times
+      catchError(this.handleError)
+    );
+  }
+
   public detail(id: any) {
     this.formData = new FormData();
 
