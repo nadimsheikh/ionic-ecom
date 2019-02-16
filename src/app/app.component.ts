@@ -57,6 +57,10 @@ export class AppComponent {
     },
   ];
 
+  public informations;
+  public types;
+  public categories;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
