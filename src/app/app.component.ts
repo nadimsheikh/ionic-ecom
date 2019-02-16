@@ -122,7 +122,7 @@ export class AppComponent {
               {
                 title: element.name,
                 image: element.image,
-                url: ''
+                url: '/information/' + element.id
               }
             );
           });

@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'manufacture-detail', loadChildren: './product/manufacture-detail/manufacture-detail.module#ManufactureDetailPageModule' },
   { path: 'wishlist', loadChildren: './account/wishlist/wishlist.module#WishlistPageModule' },
   { path: 'setting', loadChildren: './setting/setting.module#SettingPageModule' },
-  { path: 'information', loadChildren: './information/information/information.module#InformationPageModule' },
+  { path: 'information/:id', loadChildren: './information/information/information.module#InformationPageModule' },
   { path: 'contact', loadChildren: './information/contact/contact.module#ContactPageModule' },
   { path: 'notification', loadChildren: './information/notification/notification.module#NotificationPageModule' },
   { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
