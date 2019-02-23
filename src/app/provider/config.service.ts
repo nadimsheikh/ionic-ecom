@@ -7,6 +7,6 @@ export class ConfigService {
 
   public url;
   constructor() {
-    this.url = "http://localhost:8080/ci/ci-ecom/";    
+    this.url = 'http://localhost/ci/ci-ecom/';
   }
 }

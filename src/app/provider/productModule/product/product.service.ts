@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { ConfigService } from "../../config.service";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError, retry, map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { ConfigService } from '../../config.service';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,22 +18,24 @@ export class ProductService {
   public list(data: any) {
     this.formData = new FormData();
 
-
+    if (data.categoryId) {
+      this.formData.append('categoryId', data.categoryId);
+    }
     if (data.length) {
-      this.formData.append("length", data.length);
+      this.formData.append('length', data.length);
     }
 
     if (data.start) {
-      this.formData.append("start", data.start);
+      this.formData.append('start', data.start);
     }
 
     if (data.search) {
-      this.formData.append("search[value]", data.search.value);
+      this.formData.append('search', data.search);
     }
 
     if (data.order) {
-      this.formData.append("order[0][column]", data.order[0].column);
-      this.formData.append("order[0][dir]", data.order[0].dir);
+      this.formData.append('order[0][column]', data.order[0].column);
+      this.formData.append('order[0][dir]', data.order[0].dir);
     }
 
     this.url = `${this.configService.url}product/products`;
@@ -47,7 +49,7 @@ export class ProductService {
     this.formData = new FormData();
 
     this.url = `${this.configService.url}product/products/detail`;
-    this.formData.append("id", id);
+    this.formData.append('id', id);
     return this.http.post<any>(this.url, this.formData).pipe(
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
@@ -57,7 +59,7 @@ export class ProductService {
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error("An error occurred:", error.error.message);
+      console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
@@ -66,7 +68,7 @@ export class ProductService {
       );
     }
     // return an observable with a common-facing error message
-    return throwError("Something bad happened; please try again later.");
+    return throwError('Something bad happened; please try again later.');
   }
 
 }

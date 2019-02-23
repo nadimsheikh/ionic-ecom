@@ -33,39 +33,47 @@
 
 
   <ion-grid>
-
     <ion-row *ngIf="products?.length != 0">
-
       <ion-col size="6" *ngFor="let product of products">
         <ion-card>
           <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>{{product.name}}</ion-card-title>
+            <ion-thumbnail>
+              <ion-img [src]="product.image_thumb"></ion-img>
+            </ion-thumbnail>
+            <ion-card-title [routerDirection]="'backward'" [routerLink]="[product.url]">{{product.name}}
+            </ion-card-title>
           </ion-card-header>
 
           <ion-card-content>
             <p>{{product.price}}</p>
-              <p>{{product.description}}</p>
+            <p>{{product.description}}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
-
     </ion-row>
   </ion-grid>
 
 
-<!-- fab placed in the center of the content with a list on each side -->
-<ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <!-- fab placed in the center of the content with a list on each side -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button>
       <ion-icon name="share"></ion-icon>
     </ion-fab-button>
-    
-    
+
+
     <ion-fab-list side="end">
-        <ion-fab-button><ion-icon name="logo-instagram"></ion-icon></ion-fab-button>
-        <ion-fab-button><ion-icon name="logo-facebook"></ion-icon></ion-fab-button>
-        <ion-fab-button><ion-icon name="logo-vimeo"></ion-icon></ion-fab-button>
-      <ion-fab-button><ion-icon name="logo-twitter"></ion-icon></ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 

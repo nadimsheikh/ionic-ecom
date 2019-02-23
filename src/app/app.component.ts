@@ -94,7 +94,7 @@ export class AppComponent {
                 this.categories.push({
                   title: category.name,
                   image: category.image,
-                  url: '',
+                  url: '/product-list/' + category.id,
                 });
               });
             }

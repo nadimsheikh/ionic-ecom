@@ -20,9 +20,7 @@
           <div *ngFor="let type of types">
             <ion-item (click)="showTypeCategoryMenu(type)">
               <ion-label>
-                <ion-menu-toggle>
-                  {{type.title}}
-                </ion-menu-toggle>
+                {{type.title}}
               </ion-label>
               <div *ngIf="type.categories.length">
                 <ion-icon slot="end" name="{{type.showIcon}}"></ion-icon>
@@ -31,8 +29,8 @@
             <div *ngIf="type.show">
               <ion-menu-toggle auto-hide="false" *ngFor="let category of type.categories">
                 <ion-item [routerDirection]="'root'" [routerLink]="[category.url]">
-                  <ion-label slot="start">
-                    {{category.title}}
+                  <ion-label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{category.title}}
                   </ion-label>
                 </ion-item>
               </ion-menu-toggle>

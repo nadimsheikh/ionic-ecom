@@ -23,10 +23,10 @@ const routes: Routes = [
   { path: 'reset-email', loadChildren: './account/reset-email/reset-email.module#ResetEmailPageModule' },
   { path: 'reset-contact', loadChildren: './account/reset-contact/reset-contact.module#ResetContactPageModule' },
   { path: 'reset-account', loadChildren: './account/reset-account/reset-account.module#ResetAccountPageModule' },
-  { path: 'product-list', loadChildren: './product/product-list/product-list.module#ProductListPageModule' },
-  { path: 'product-detail', loadChildren: './product/product-detail/product-detail.module#ProductDetailPageModule' },
+  { path: 'product-list/:categoryId', loadChildren: './product/product-list/product-list.module#ProductListPageModule' },
+  { path: 'product-detail/:id', loadChildren: './product/product-detail/product-detail.module#ProductDetailPageModule' },
   { path: 'manufacture-list', loadChildren: './product/manufacture-list/manufacture-list.module#ManufactureListPageModule' },
-  { path: 'manufacture-detail', loadChildren: './product/manufacture-detail/manufacture-detail.module#ManufactureDetailPageModule' },
+  { path: 'manufacture-detail/:id', loadChildren: './product/manufacture-detail/manufacture-detail.module#ManufactureDetailPageModule' },
   { path: 'wishlist', loadChildren: './account/wishlist/wishlist.module#WishlistPageModule' },
   { path: 'setting', loadChildren: './setting/setting.module#SettingPageModule' },
   { path: 'information/:id', loadChildren: './information/information/information.module#InformationPageModule' },
@@ -41,4 +41,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
