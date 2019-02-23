@@ -18,7 +18,25 @@
     <ion-img [src]="data?.image_thumb"></ion-img>
   </ion-thumbnail>
   <h2>price: {{data?.price}}</h2>
-  <h3>model: {{data?.model}}</h3>
-  <p>{{data?.description}}</p>
-  <p>{{data?.text}}</p>
+
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="info" checked>
+      <ion-label>Info</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="detail">
+      <ion-label>Details</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="section">
+    <div *ngSwitchCase="'info'">
+      <h3>model: {{data?.model}}</h3>
+      <p>{{data?.description}}</p>
+    </div>
+    <div *ngSwitchCase="'detail'">      
+      <div [innerHtml]="data?.text"></div>
+    </div>
+  </div>
+
+
 </ion-content>

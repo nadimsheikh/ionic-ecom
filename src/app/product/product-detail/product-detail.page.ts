@@ -15,6 +15,7 @@ export class ProductDetailPage implements OnInit {
   public categoryId;
   public data: any;
   public backUrl;
+  section: String = 'info';
 
   constructor(
     private productService: ProductService,
@@ -23,9 +24,14 @@ export class ProductDetailPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.categoryId = localStorage.getItem('categoryId');
+    this.categoryId = localStorage.getItem('filterCategoryId');
     this.backUrl = '/product-list/' + this.categoryId;
     this.getData();
+  }
+
+
+  segmentChanged(event) {
+    this.section = event.detail.value;
   }
 
   doRefresh(event) {

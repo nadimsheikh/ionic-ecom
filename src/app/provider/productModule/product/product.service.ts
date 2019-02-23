@@ -18,7 +18,7 @@ export class ProductService {
   public list(data: any) {
     this.formData = new FormData();
 
-    if (data.categoryId) {
+    if (data.categoryId && data.categoryId !== 'null') {
       this.formData.append('categoryId', data.categoryId);
     }
     if (data.length) {

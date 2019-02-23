@@ -25,7 +25,9 @@ export class ProductListPage implements OnInit {
   ngOnInit() {
     this.products = [];
     this.categoryId = this.activatedRoute.snapshot.paramMap.get('categoryId');
-    localStorage.setItem('filterCategoryId', this.categoryId);
+    if (this.categoryId && this.categoryId !== 'null') {
+      localStorage.setItem('filterCategoryId', this.categoryId);
+    }
     this.filter['categoryId'] = this.categoryId;
     this.getProducts();
   }

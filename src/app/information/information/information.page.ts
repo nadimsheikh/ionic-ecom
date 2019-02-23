@@ -22,10 +22,17 @@ export class InformationPage implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.getInfo();
+    this.getData();
   }
 
-  getInfo() {
+  doRefresh(event) {
+    this.getData();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
+  getData() {
     this.infoService.detail(this.id).subscribe(
       response => {
         if (!response.status) {
