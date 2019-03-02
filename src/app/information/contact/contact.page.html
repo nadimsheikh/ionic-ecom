@@ -5,5 +5,40 @@
 </ion-header>
 
 <ion-content padding>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
+    <!-- <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
+      <div *ngIf="formErrors.name" class="text-error">
+        {{ formErrors.name }}
+      </div>
+    </ion-item> -->
+
+    <!-- <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
+      <div *ngIf="formErrors.email" class="text-error">
+        {{ formErrors.email }}
+      </div>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Contact</ion-label>
+      <ion-input type="text" formControlName="contact" [(ngModel)]="contact" placeholder="Enter Contact"></ion-input>
+      <div *ngIf="formErrors.contact" class="text-error">
+        {{ formErrors.contact }}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Text</ion-label>
+      <ion-textarea formControlName="text" [(ngModel)]="text" placeholder="Enter text"></ion-textarea>
+      <div *ngIf="formErrors.text" class="text-error">
+        {{ formErrors.text }}
+      </div>
+    </ion-item> -->
+
+    <ion-button color="primary" expand="block">Send</ion-button>
+  </form>
 </ion-content>

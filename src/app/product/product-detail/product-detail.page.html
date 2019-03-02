@@ -26,6 +26,9 @@
     <ion-segment-button value="detail">
       <ion-label>Details</ion-label>
     </ion-segment-button>
+    <ion-segment-button value="attributes">
+      <ion-label>Attributes</ion-label>
+    </ion-segment-button>
   </ion-segment>
 
   <div [ngSwitch]="section">
@@ -33,8 +36,22 @@
       <h3>model: {{data?.model}}</h3>
       <p>{{data?.description}}</p>
     </div>
-    <div *ngSwitchCase="'detail'">      
+    <div *ngSwitchCase="'detail'">
       <div [innerHtml]="data?.text"></div>
+    </div>
+    <div *ngSwitchCase="'attributes'">
+
+      <ion-grid *ngIf="data?.attributes.length != 0">
+        <ion-row *ngFor="let attribute of data.attributes">
+          <ion-col size="6">
+            {{attribute.attribute}}
+          </ion-col>
+          <ion-col size="6">
+              {{attribute.text}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </div>
   </div>
 

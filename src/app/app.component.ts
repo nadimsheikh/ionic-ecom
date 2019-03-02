@@ -30,7 +30,7 @@ export class AppComponent {
     },
     {
       title: 'Contact',
-      url: '/list',
+      url: '/contact',
       icon: 'contact'
     },
     {
