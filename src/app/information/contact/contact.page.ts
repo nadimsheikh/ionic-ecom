@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Validators,
-  FormBuilder,
-  FormGroup
-} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ContactService } from '../../provider/infoModule/contact/contact.service';
 import { FormService } from '../../provider/form.service';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -15,15 +12,16 @@ import { FormService } from '../../provider/form.service';
 })
 export class ContactPage implements OnInit {
 
-  public message;
-  public messageTitle;
-  public name;
-  public email;
-  public contact;
-  public text;
+  message;
+  messageTitle;
+  name;
+  email;
+  contact;
+  text;
 
-  public form: FormGroup;
-  public formErrors = {
+  form: FormGroup;
+
+  formErrors = {
     name: '',
     email: '',
     contact: '',
@@ -34,12 +32,23 @@ export class ContactPage implements OnInit {
     private masterService: ContactService,
     private formService: FormService,
     private formBuilder: FormBuilder,
+    public toastController: ToastController
   ) {
     this.createForm();
   }
 
-  ngOnInit() {
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      showCloseButton: true,
+      position: 'bottom',
+      duration: 2000,
+      closeButtonText: 'Done'
+    });
+    toast.present();
+  }
 
+  ngOnInit() {
   }
 
   public createForm() {
@@ -63,7 +72,6 @@ export class ContactPage implements OnInit {
     // mark all fields as touched
     this.formService.markFormGroupTouched(this.form);
     if (this.form.valid) {
-
       this.masterService.save(this.form.value).subscribe(
         response => {
           if (!response.status) {
@@ -77,15 +85,12 @@ export class ContactPage implements OnInit {
           } else {
             this.message = response.message;
             this.messageTitle = 'Sucess!';
-
             this.form.reset();
-
           }
-
+          this.presentToast(this.message);
         },
         err => {
           console.error(err);
-
         }
       );
     } else {
@@ -94,7 +99,6 @@ export class ContactPage implements OnInit {
         this.formErrors,
         false
       );
-
     }
   }
 

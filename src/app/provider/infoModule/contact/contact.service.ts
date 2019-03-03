@@ -20,6 +20,7 @@ export class ContactService {
     this.formData.append('email', data.email);
     this.formData.append('contact', data.contact);
     this.formData.append('text', data.text);
+    this.formData.append('status', '1');
     this.url = `${this.configService.url}information/inquiries/save`;
     return this.http.post<any>(this.url, this.formData).pipe(
       // retry(1), // retry a failed request up to 3 times

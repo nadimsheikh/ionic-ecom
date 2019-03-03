@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class FormService {
-  constructor() {}
+  constructor() { }
   // get all values of the formGroup, loop over them
   // then mark each field as touched
   public markFormGroupTouched(formGroup: FormGroup) {
@@ -19,11 +19,11 @@ export class FormService {
   // return list of error messages
   public validationMessages() {
     const messages = {
-      required: "This field is required",
-      email: "This email address is invalid",
-      maxlength: "Max length not valid",
-      minlength: "Min Length not valid",
-      pattern: "Not valid value",
+      required: 'This field is required',
+      email: 'This email address is invalid',
+      maxlength: 'Max length not valid',
+      minlength: 'Min Length not valid',
+      pattern: 'Not valid value',
       invalid_characters: (matches: any[]) => {
         let matchedCharacters = matches;
 
@@ -33,12 +33,12 @@ export class FormService {
             string += character;
 
             if (matchedCharacters.length !== index + 1) {
-              string += ", ";
+              string += ', ';
             }
 
             return string;
           },
-          ""
+          ''
         );
 
         return `These characters are not allowed: ${matchedCharacters}`;
@@ -61,14 +61,14 @@ export class FormService {
 
     for (const field in formErrors) {
       if (field) {
-        formErrors[field] = "";
+        formErrors[field] = '';
         const control = form.get(field);
 
         const messages = this.validationMessages();
         if (control && !control.valid) {
           if (!checkDirty || (control.dirty || control.touched)) {
             for (const key in control.errors) {
-              if (key && key !== "invalid_characters") {
+              if (key && key !== 'invalid_characters') {
                 formErrors[field] = formErrors[field] || messages[key];
               } else {
                 formErrors[field] =

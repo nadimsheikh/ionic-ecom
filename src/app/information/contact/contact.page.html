@@ -1,44 +1,56 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>contact</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <!-- <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input type="text" formControlName="name" [(ngModel)]="name" placeholder="Enter Name"></ion-input>
-      <div *ngIf="formErrors.name" class="text-error">
-        {{ formErrors.name }}
-      </div>
-    </ion-item> -->
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.name ? 'danger' : 'primary'}}">Name</ion-label>
+        <ion-input type="text" formControlName="name" [(ngModel)]="name"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.name">
+        <ion-text color="danger">{{ formErrors.name }}</ion-text>
+      </ion-item>
 
-    <!-- <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email" [(ngModel)]="email" placeholder="Enter Email"></ion-input>
-      <div *ngIf="formErrors.email" class="text-error">
-        {{ formErrors.email }}
-      </div>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label position="floating">Contact</ion-label>
-      <ion-input type="text" formControlName="contact" [(ngModel)]="contact" placeholder="Enter Contact"></ion-input>
-      <div *ngIf="formErrors.contact" class="text-error">
-        {{ formErrors.contact }}
-      </div>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.email ? 'danger' : 'primary'}}">Email</ion-label>
+        <ion-input type="email" formControlName="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.email">
+        <ion-text color="danger">{{ formErrors.email }}</ion-text>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>Text</ion-label>
-      <ion-textarea formControlName="text" [(ngModel)]="text" placeholder="Enter text"></ion-textarea>
-      <div *ngIf="formErrors.text" class="text-error">
-        {{ formErrors.text }}
-      </div>
-    </ion-item> -->
 
-    <ion-button color="primary" expand="block">Send</ion-button>
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.contact ? 'danger' : 'primary'}}">Contact</ion-label>
+        <ion-input type="text" formControlName="contact" [(ngModel)]="contact"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.contact">
+        <ion-text color="danger">{{ formErrors.contact }}</ion-text>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.text ? 'danger' : 'primary'}}">Text</ion-label>
+        <ion-textarea formControlName="text" [(ngModel)]="text"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="formErrors.text">
+        <ion-text color="danger">{{ formErrors.text }}</ion-text>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button type="submit" color="primary" expand="block">Send</ion-button>
   </form>
+
+
 </ion-content>
