@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    if (!localStorage.getItem('user')) {
+      this.router.navigate(['login']);
+    }
+  }
+
+
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['login']);
   }
 
 }

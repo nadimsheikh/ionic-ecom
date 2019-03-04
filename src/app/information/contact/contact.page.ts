@@ -34,7 +34,7 @@ export class ContactPage implements OnInit {
     private formBuilder: FormBuilder,
     public toastController: ToastController
   ) {
-    this.createForm();
+
   }
 
   async presentToast(msg) {
@@ -49,6 +49,7 @@ export class ContactPage implements OnInit {
   }
 
   ngOnInit() {
+    this.createForm();
   }
 
   public createForm() {

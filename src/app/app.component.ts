@@ -146,7 +146,7 @@ export class AppComponent {
   getAccountMenu() {
     this.accountMenu.push({
       title: 'My Account',
-      url: '/list',
+      url: '/account',
       icon: 'person'
     });
     this.accountMenu.push({
