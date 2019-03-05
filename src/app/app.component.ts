@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { TypeService } from './provider/productModule/type/type.service';
 import { InformationService } from './provider/infoModule/information/information.service';
-
+import { UserService } from './provider/account/user/user.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -34,13 +34,11 @@ export class AppComponent {
       icon: 'contact'
     },
     {
-      title: 'Settings',
-      url: '/list',
+      title: 'Setting',
+      url: '/setting',
       icon: 'settings'
     },
   ];
-
-
 
   public informations: any[] = [];
   public showInfo: Boolean = false;
@@ -54,6 +52,7 @@ export class AppComponent {
   public message;
   public messageTitle;
   public filter: any[] = [];
+  public data;
 
   constructor(
     private platform: Platform,
@@ -61,9 +60,10 @@ export class AppComponent {
     private statusBar: StatusBar,
     private typeService: TypeService,
     private infoService: InformationService,
+    private userService: UserService
   ) {
     this.initializeApp();
-    this.getAccountMenu();
+    // this.getAccountMenu();
     this.getTypes();
     this.getInfo();
   }
@@ -74,6 +74,11 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  menuOpened() {
+    this.getAccountMenu();
+  }
+
 
   getTypes() {
     this.typeService.menu(this.filter).subscribe(
@@ -144,21 +149,37 @@ export class AppComponent {
   }
 
   getAccountMenu() {
-    this.accountMenu.push({
-      title: 'My Account',
-      url: '/account',
-      icon: 'person'
-    });
-    this.accountMenu.push({
-      title: 'My Wishlist',
-      url: '/list',
-      icon: 'person'
-    });
-    this.accountMenu.push({
-      title: 'My Orders',
-      url: '/list',
-      icon: 'basket'
-    });
+    this.accountMenu = [];
+    this.userService.getStorageData().subscribe(
+      (response) => {
+        this.data = response;
+        if (this.data) {
+          this.accountMenu.push({
+            title: 'My Account',
+            url: '/account',
+            icon: 'person'
+          });
+          this.accountMenu.push({
+            title: 'My Wishlist',
+            url: '/list',
+            icon: 'person'
+          });
+          this.accountMenu.push({
+            title: 'My Orders',
+            url: '/list',
+            icon: 'basket'
+          });
+        } else {
+          this.accountMenu.push({
+            title: 'Login',
+            url: '/login',
+            icon: 'lock'
+          });
+        }
+      }
+    );
+
+
   }
 
   showInfoMenu() {

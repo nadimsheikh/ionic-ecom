@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { UserService } from '../../provider/account/user/user.service';
 @Component({
   selector: 'app-account',
   templateUrl: './account.page.html',
   styleUrls: ['./account.page.scss'],
 })
-export class AccountPage implements OnInit, OnDestroy {
+export class AccountPage implements OnInit {
 
   public data;
   public name;
@@ -30,10 +29,6 @@ export class AccountPage implements OnInit, OnDestroy {
         this.contact = this.data.contact;
       }
     }
-  }
-
-  ngOnDestroy(): void {
-    this.getData().unsubscribe();
   }
 
 

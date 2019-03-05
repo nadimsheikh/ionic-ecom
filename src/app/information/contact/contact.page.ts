@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ContactService } from '../../provider/infoModule/contact/contact.service';
 import { FormService } from '../../provider/form.service';
 import { ToastController } from '@ionic/angular';
-
+import { UserService } from '../../provider/account/user/user.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,28 +11,30 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./contact.page.scss'],
 })
 export class ContactPage implements OnInit {
+  public data;
+  public message;
+  public messageTitle;
+  public name;
+  public email;
+  public contact;
+  public text;
 
-  message;
-  messageTitle;
-  name;
-  email;
-  contact;
-  text;
+  public form: FormGroup;
 
-  form: FormGroup;
-
-  formErrors = {
+  public formErrors = {
     name: '',
     email: '',
     contact: '',
     text: '',
   };
 
+
   constructor(
     private masterService: ContactService,
     private formService: FormService,
     private formBuilder: FormBuilder,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private userService: UserService
   ) {
 
   }
@@ -49,6 +51,12 @@ export class ContactPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getData();
+    if (this.data) {
+      this.name = this.data.name;
+      this.email = this.data.email;
+      this.contact = this.data.contact;
+    }
     this.createForm();
   }
 
@@ -103,5 +111,12 @@ export class ContactPage implements OnInit {
     }
   }
 
+  getData(): any {
+    this.userService.getStorageData().subscribe(
+      (response) => {
+        this.data = response;
+      }
+    );
+  }
 
 }
