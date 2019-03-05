@@ -9,8 +9,18 @@
 
 <ion-content padding>
 
+  <ion-list>
+    <ion-item>
+      <ion-text>Welcome, {{name}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text>{{email}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text>{{contact}}</ion-text>
+    </ion-item>
+  </ion-list>
 
-    
-    <ion-button expand="block" (click)="logout()">Logout</ion-button>
-    
+  <ion-button expand="block" (click)="logout()">Logout</ion-button>
+
 </ion-content>

@@ -8,7 +8,7 @@ import { catchError, retry, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-
+  public data: any;
   public formData: FormData = new FormData();
   public responseData: any;
   private url;
@@ -51,6 +51,19 @@ export class UserService {
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
     );
+  }
+
+  public setStorageData(data: any) {
+    localStorage.setItem('user', data);
+  }
+
+  public getStorageData() {
+    const ObservableData = new Observable(observer => {
+      this.data = JSON.parse(localStorage.getItem('user'));
+      observer.next(this.data);
+      observer.complete();
+    });
+    return ObservableData;
   }
 
   private handleError(error: HttpErrorResponse) {

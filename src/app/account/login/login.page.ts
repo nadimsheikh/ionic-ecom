@@ -85,7 +85,7 @@ export class LoginPage implements OnInit {
           } else {
             this.message = response.message;
             this.messageTitle = 'Sucess!';
-            localStorage.setItem('user', JSON.stringify(response.data));
+            this.masterService.setStorageData(JSON.stringify(response.data));
             this.form.reset();
           }
           this.presentToast(this.message);
