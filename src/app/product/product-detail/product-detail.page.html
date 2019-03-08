@@ -19,6 +19,9 @@
   </ion-thumbnail>
   <h2>price: {{data?.price}}</h2>
 
+  <ion-button color="primary">Add to cart</ion-button>
+  <ion-button color="light">Add to wishlist</ion-button>
+
   <ion-segment (ionChange)="segmentChanged($event)">
     <ion-segment-button value="info" checked>
       <ion-label>Info</ion-label>
@@ -47,7 +50,7 @@
             {{attribute.attribute}}
           </ion-col>
           <ion-col size="6">
-              {{attribute.text}}
+            {{attribute.text}}
           </ion-col>
         </ion-row>
       </ion-grid>
