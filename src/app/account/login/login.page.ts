@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-
   message;
   messageTitle;
   username;
@@ -102,6 +101,10 @@ export class LoginPage implements OnInit {
         false
       );
     }
+  }
+
+  redirectRegister() {
+    this.router.navigate(['register']);
   }
 
 
