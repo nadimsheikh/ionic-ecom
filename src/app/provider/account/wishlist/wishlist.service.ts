@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfigService } from '../config.service';
+import { ConfigService } from '../../config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { catchError, retry, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class WishlistService {
 
   public formData: FormData = new FormData();
   public responseData: any;
@@ -17,6 +17,9 @@ export class CartService {
   public list(data: any) {
     this.formData = new FormData();
 
+    if (data.customer_id) {
+      this.formData.append('customer_id', data.customer_id);
+    }
     if (data.draw) {
       this.formData.append('draw', data.draw);
     }
@@ -38,7 +41,7 @@ export class CartService {
       this.formData.append('order[0][dir]', data.order[0].dir);
     }
 
-    this.url = `${this.configService.url}cart/carts`;
+    this.url = `${this.configService.url}customer/customer_wishlists`;
     return this.http.post<any>(this.url, this.formData).pipe(
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
@@ -48,37 +51,9 @@ export class CartService {
   public add(data: any) {
     this.formData = new FormData();
 
-    this.url = `${this.configService.url}cart/carts/save`;
-    this.formData.append('token', data.token);
+    this.url = `${this.configService.url}customer/customer_wishlists/save`;
     this.formData.append('customer_id', data.customer_id);
     this.formData.append('product_id', data.product_id);
-    this.formData.append('quantity', data.quantity);
-    return this.http.post<any>(this.url, this.formData).pipe(
-      // retry(1), // retry a failed request up to 3 times
-      catchError(this.handleError)
-    );
-  }
-
-  public edit(data: any) {
-    this.formData = new FormData();
-
-    this.url = `${this.configService.url}cart/carts/save`;
-    this.formData.append('id', data.id);
-    this.formData.append('token', data.token);
-    this.formData.append('customer_id', data.customer_id);
-    this.formData.append('product_id', data.product_id);
-    this.formData.append('quantity', data.quantity);
-    return this.http.post<any>(this.url, this.formData).pipe(
-      // retry(1), // retry a failed request up to 3 times
-      catchError(this.handleError)
-    );
-  }
-
-  public detail(id: any) {
-    this.formData = new FormData();
-
-    this.url = `${this.configService.url}cart/carts/detail`;
-    this.formData.append('id', id);
     return this.http.post<any>(this.url, this.formData).pipe(
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
@@ -86,7 +61,7 @@ export class CartService {
   }
 
   public delete(id: any) {
-    this.url = `${this.configService.url}cart/carts/delete/` + id;
+    this.url = `${this.configService.url}customer/customer_wishlists/delete/` + id;
     return this.http.get<any>(this.url).pipe(
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
