@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../provider/cart/cart.service';
+import { CartService } from '../../provider/cart/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 @Component({
