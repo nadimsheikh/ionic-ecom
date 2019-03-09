@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../provider/productModule/product/product.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { WishlistService } from '../../provider/account/wishlist/wishlist.service';
+import { CartService } from '../../provider/cart/cart.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,7 +21,10 @@ export class ProductDetailPage implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private activatedRoute: ActivatedRoute
+    private wishlistService: WishlistService,
+    private cartService: CartService,
+    private activatedRoute: ActivatedRoute,
+    public toastController: ToastController,
   ) { }
 
   ngOnInit() {
@@ -58,6 +63,57 @@ export class ProductDetailPage implements OnInit {
         console.error(err);
       }
     );
+  }
+
+  addWishlist() {
+    this.wishlistService.add(this.id).subscribe(
+      response => {
+        // console.log(response);
+        if (!response.status) {
+          this.message = response.message;
+          this.messageTitle = 'Warning!';
+        } else {
+          this.message = response.message;
+          this.messageTitle = 'Sucess!';
+        }
+        this.presentToast(this.message);
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+  addCart() {
+    this.cartService.add({
+      product_id: this.id,
+      quantity: 1,
+    }).subscribe(
+      response => {
+        // console.log(response);
+        if (!response.status) {
+          this.message = response.message;
+          this.messageTitle = 'Warning!';
+        } else {
+          this.message = response.message;
+          this.messageTitle = 'Sucess!';
+        }
+        this.presentToast(this.message);
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      showCloseButton: true,
+      position: 'bottom',
+      duration: 2000,
+      closeButtonText: 'Done'
+    });
+    toast.present();
   }
 
 }

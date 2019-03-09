@@ -27,7 +27,7 @@ export class HomePage {
     this.route.navigateByUrl('/product-list');
   }
   goToCart() {
-
+    this.route.navigateByUrl('/cart');
   }
 
   typeChanged(ev: any) {

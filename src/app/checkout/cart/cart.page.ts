@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { WishlistService } from '../../provider/account/wishlist/wishlist.service';
+import { CartService } from '../provider/cart/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 @Component({
-  selector: 'app-wishlist',
-  templateUrl: './wishlist.page.html',
-  styleUrls: ['./wishlist.page.scss'],
+  selector: 'app-cart',
+  templateUrl: './cart.page.html',
+  styleUrls: ['./cart.page.scss'],
 })
-export class WishlistPage implements OnInit {
+export class CartPage implements OnInit {
 
   public message;
   public messageTitle;
@@ -20,7 +20,7 @@ export class WishlistPage implements OnInit {
   public start;
 
   constructor(
-    private wishlistService: WishlistService,
+    private cartService: CartService,
     private activatedRoute: ActivatedRoute,
     public toastController: ToastController,
   ) { }
@@ -51,7 +51,7 @@ export class WishlistPage implements OnInit {
   }
 
   removeProduct(product: any) {
-    this.wishlistService.delete(product.id).subscribe(
+    this.cartService.delete(product.id).subscribe(
       response => {
         // console.log(response);
         if (!response.status) {
@@ -73,7 +73,7 @@ export class WishlistPage implements OnInit {
   }
 
   getProducts() {
-    this.wishlistService.list(this.filter).subscribe(
+    this.cartService.list(this.filter).subscribe(
       response => {
         // console.log(response);
         if (!response.status) {
@@ -87,6 +87,7 @@ export class WishlistPage implements OnInit {
             this.products.push({
               id: element.id,
               product_name: element.product_name,
+              price: element.price,
               updated_at: element.updated_at,
               product_image: element.product_image,
               url: '/product-detail/' + element.product_id,

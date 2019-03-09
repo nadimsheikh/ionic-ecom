@@ -25,7 +25,7 @@ export class AppComponent {
     },
     {
       title: 'My Cart',
-      url: '/list',
+      url: '/cart',
       icon: 'cart'
     },
     {
@@ -161,12 +161,12 @@ export class AppComponent {
           });
           this.accountMenu.push({
             title: 'My Wishlist',
-            url: '/list',
+            url: '/wishlist',
             icon: 'person'
           });
           this.accountMenu.push({
             title: 'My Orders',
-            url: '/list',
+            url: '/orders',
             icon: 'basket'
           });
         } else {

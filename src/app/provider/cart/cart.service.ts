@@ -3,7 +3,7 @@ import { ConfigService } from '../config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
-
+import { UserService } from '../account/user/user.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,10 +12,14 @@ export class CartService {
   public formData: FormData = new FormData();
   public responseData: any;
   private url;
-  constructor(public http: HttpClient, public configService: ConfigService) { }
+  constructor(public http: HttpClient,
+    public configService: ConfigService,
+    public userService: UserService) { }
 
   public list(data: any) {
     this.formData = new FormData();
+
+    this.formData.append('token', this.userService.getToken());
 
     if (data.draw) {
       this.formData.append('draw', data.draw);
@@ -47,12 +51,12 @@ export class CartService {
 
   public add(data: any) {
     this.formData = new FormData();
-
     this.url = `${this.configService.url}cart/carts/save`;
-    this.formData.append('token', data.token);
-    this.formData.append('customer_id', data.customer_id);
+    this.formData.append('token', this.userService.getToken());
+    this.formData.append('customer_id', this.userService.getId());
     this.formData.append('product_id', data.product_id);
     this.formData.append('quantity', data.quantity);
+    this.formData.append('status', '1');
     return this.http.post<any>(this.url, this.formData).pipe(
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
@@ -64,8 +68,8 @@ export class CartService {
 
     this.url = `${this.configService.url}cart/carts/save`;
     this.formData.append('id', data.id);
-    this.formData.append('token', data.token);
-    this.formData.append('customer_id', data.customer_id);
+    this.formData.append('token', this.userService.getToken());
+    this.formData.append('customer_id', this.userService.getId());
     this.formData.append('product_id', data.product_id);
     this.formData.append('quantity', data.quantity);
     return this.http.post<any>(this.url, this.formData).pipe(

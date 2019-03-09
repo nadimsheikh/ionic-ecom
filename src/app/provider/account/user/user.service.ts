@@ -66,6 +66,15 @@ export class UserService {
     return ObservableData;
   }
 
+  public getId() {
+    this.data = JSON.parse(localStorage.getItem('user'));
+    return this.data.id;
+  }
+  public getToken() {
+    this.data = JSON.parse(localStorage.getItem('user'));
+    return this.data.token;
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

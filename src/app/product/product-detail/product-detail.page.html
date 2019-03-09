@@ -14,13 +14,12 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-thumbnail>
-    <ion-img [src]="data?.image_thumb"></ion-img>
-  </ion-thumbnail>
+  
+  <ion-img [src]="data?.image_thumb"></ion-img>
   <h2>price: {{data?.price}}</h2>
 
-  <ion-button color="primary">Add to cart</ion-button>
-  <ion-button color="light">Add to wishlist</ion-button>
+  <ion-button color="primary" (click)="addCart()">Add to cart</ion-button>
+  <ion-button color="light" (click)="addWishlist()">Add to wishlist</ion-button>
 
   <ion-segment (ionChange)="segmentChanged($event)">
     <ion-segment-button value="info" checked>

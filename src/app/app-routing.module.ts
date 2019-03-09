@@ -33,9 +33,12 @@ const routes: Routes = [
   { path: 'information/:id', loadChildren: './information/information/information.module#InformationPageModule' },
   { path: 'contact', loadChildren: './information/contact/contact.module#ContactPageModule' },
   { path: 'notification', loadChildren: './information/notification/notification.module#NotificationPageModule' },
-  { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
   { path: 'product-filter', loadChildren: './product/product-filter/product-filter.module#ProductFilterPageModule' },
-  { path: 'search', loadChildren: './product/search/search.module#SearchPageModule' }
+  { path: 'search', loadChildren: './product/search/search.module#SearchPageModule' },
+  { path: 'cart', loadChildren: './checkout/cart/cart.module#CartPageModule' },
+  { path: 'order-info-form', loadChildren: './checkout/order-info-form/order-info-form.module#OrderInfoFormPageModule' },
+  { path: 'order-address-form', loadChildren: './checkout/order-address-form/order-address-form.module#OrderAddressFormPageModule' },
+  { path: 'order-final-form', loadChildren: './checkout/order-final-form/order-final-form.module#OrderFinalFormPageModule' }
 ];
 
 @NgModule({

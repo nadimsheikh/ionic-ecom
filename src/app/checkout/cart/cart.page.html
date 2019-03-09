@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>wishlist</ion-title>
+    <ion-title>cart</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,13 +22,19 @@
         <ion-avatar slot="start">
           <ion-img [src]="product.product_image"></ion-img>
         </ion-avatar>
-        {{product.product_name}}
+        <ion-label>
+          {{product.product_name}}
+        </ion-label>
+        <p>{{product.price}}</p>
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option color="danger" (click)="removeProduct(product)">
-            <ion-icon name="trash"></ion-icon>
+          <ion-icon name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <ion-button color="primary" (click)="addCart()">Continue</ion-button>
+
 </ion-content>
