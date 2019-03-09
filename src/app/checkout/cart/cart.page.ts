@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../provider/cart/cart.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-cart',
@@ -23,6 +23,7 @@ export class CartPage implements OnInit {
     private cartService: CartService,
     private activatedRoute: ActivatedRoute,
     public toastController: ToastController,
+    private route: Router,
   ) { }
 
   async presentToast(msg) {
@@ -100,6 +101,11 @@ export class CartPage implements OnInit {
         console.error(err);
       }
     );
+  }
+
+
+  goToNext() {
+    this.route.navigateByUrl('/order-info-form');
   }
 
 }

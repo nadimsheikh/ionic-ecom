@@ -1,9 +1,72 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/order-info-form"></ion-back-button>
+    </ion-buttons>
     <ion-title>order-address-form</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
+    <ion-list no-lines>
+
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.country_id ? 'danger' : 'primary'}}">Country</ion-label>
+        <ion-select placeholder="Select Country" formControlName="country_id" [(ngModel)]="country_id"
+          (ionChange)="setCountry($event)">
+          <ion-select-option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="formErrors.country_id">
+        <ion-text color="danger">{{ formErrors.country_id }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.zone_id ? 'danger' : 'primary'}}">Zone</ion-label>
+        <ion-select placeholder="Select Zone" formControlName="zone_id" [(ngModel)]="zone_id"
+          (ionChange)="setZone($event)">
+          <ion-select-option *ngFor="let zone of zones" value="{{zone.id}}">{{zone.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="formErrors.zone_id">
+        <ion-text color="danger">{{ formErrors.zone_id }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.city_id ? 'danger' : 'primary'}}">City</ion-label>
+        <ion-select placeholder="Select City" formControlName="city_id" [(ngModel)]="city_id"
+          (ionChange)="setCity($event)">
+          <ion-select-option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="formErrors.city_id">
+        <ion-text color="danger">{{ formErrors.city_id }}</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.postcode ? 'danger' : 'primary'}}">postcode</ion-label>
+        <ion-input type="text" formControlName="postcode" [(ngModel)]="postcode"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.postcode">
+        <ion-text color="danger">{{ formErrors.postcode }}</ion-text>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating" color="{{formErrors.address ? 'danger' : 'primary'}}">address</ion-label>
+        <ion-textarea formControlName="address" [(ngModel)]="address"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="formErrors.address">
+        <ion-text color="danger">{{ formErrors.address }}</ion-text>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button type="submit" color="primary" expand="block">Next</ion-button>
+  </form>
 </ion-content>
