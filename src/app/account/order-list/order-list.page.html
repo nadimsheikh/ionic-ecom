@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>order-list</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+  <ion-list *ngIf="orders?.length != 0">
+    <ion-item *ngFor="let order of orders" [routerDirection]="'backward'" [routerLink]="[order.url]">
+      <ion-label slot="start">
+        <ion-text>
+          #{{order.id}}
+        </ion-text>
+        <ion-text>
+          <p>{{order.name}}</p>
+          <p>{{order.email}}</p>
+          <p>{{order.contact}}</p>
+        </ion-text>
+      </ion-label>
+      <ion-note slot="end">{{order.total}}</ion-note>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

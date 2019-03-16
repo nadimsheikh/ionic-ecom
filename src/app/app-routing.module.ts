@@ -2,19 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
-  },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: 'list', loadChildren: './list/list.module#ListPageModule' },
   { path: 'account', loadChildren: './account/account/account.module#AccountPageModule' },
   { path: 'login', loadChildren: './account/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './account/register/register.module#RegisterPageModule' },
@@ -38,7 +28,9 @@ const routes: Routes = [
   { path: 'cart', loadChildren: './checkout/cart/cart.module#CartPageModule' },
   { path: 'order-info-form', loadChildren: './checkout/order-info-form/order-info-form.module#OrderInfoFormPageModule' },
   { path: 'order-address-form', loadChildren: './checkout/order-address-form/order-address-form.module#OrderAddressFormPageModule' },
-  { path: 'order-final-form', loadChildren: './checkout/order-final-form/order-final-form.module#OrderFinalFormPageModule' }
+  { path: 'order-final-form', loadChildren: './checkout/order-final-form/order-final-form.module#OrderFinalFormPageModule' },
+  { path: 'order-list', loadChildren: './account/order-list/order-list.module#OrderListPageModule' },
+  { path: 'order-detail/:id', loadChildren: './account/order-detail/order-detail.module#OrderDetailPageModule' }
 ];
 
 @NgModule({

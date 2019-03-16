@@ -25,6 +25,12 @@
 
 <ion-content>
 
+  <ion-slides *ngIf="banners?.length != 0" pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let banner of banners" [style.backgroundImage]="'url('+banner.image_thumb+')'">
+      <h1 style="color:#fff;padding:50px;">{{banner.name}}</h1>
+    </ion-slide>
+  </ion-slides>
+
   <ion-segment scrollable *ngIf="types?.length != 0" (ionChange)="typeChanged($event)">
     <ion-segment-button *ngFor="let type of types">
       <ion-label>{{type.name}}</ion-label>

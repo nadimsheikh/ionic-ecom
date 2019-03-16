@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TypeService } from '../provider/productModule/type/type.service';
 import { ProductService } from '../provider/productModule/product/product.service';
+import { SettingService } from '../provider/setting/setting.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
@@ -14,11 +15,19 @@ export class HomePage {
   public types;
   public filter: any[] = [];
   public products: any[] = [];
+  public banners: any[] = [];
+
+  slideOpts = {
+    effect: 'flip'
+  };
+
   constructor(
     private route: Router,
     private typeService: TypeService,
-    private productService: ProductService
+    private productService: ProductService,
+    private settingService: SettingService
   ) {
+    this.getBanners();
     this.getTypes();
     this.getProducts();
   }
@@ -34,6 +43,24 @@ export class HomePage {
     console.log('Segment changed', ev);
   }
 
+  getBanners() {
+    this.settingService.banner(1).subscribe(
+      response => {
+        // console.log(response);
+        if (!response.status) {
+          this.message = response.error;
+          this.messageTitle = 'Warning!';
+        } else {
+          this.message = response.message;
+          this.messageTitle = 'Sucess!';
+          this.banners = response.data.images;
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
   getTypes() {
     this.typeService.list(this.filter).subscribe(
       response => {

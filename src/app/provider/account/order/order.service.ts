@@ -52,6 +52,17 @@ export class OrderService {
     );
   }
 
+  public detail(id: any) {
+    this.formData = new FormData();
+
+    this.url = `${this.configService.url}order/orders/detail`;
+    this.formData.append('id', id);
+    return this.http.post<any>(this.url, this.formData).pipe(
+      // retry(1), // retry a failed request up to 3 times
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

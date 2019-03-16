@@ -166,7 +166,7 @@ export class AppComponent {
           });
           this.accountMenu.push({
             title: 'My Orders',
-            url: '/orders',
+            url: '/order-list',
             icon: 'basket'
           });
         } else {

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="{{backUrl}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>#{{data?.id}} {{data?.order_type}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <p>{{data?.created_at}}</p>
+      <p>{{data?.total}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Products</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngIf="data?.products.length != 0">
+        <ion-item *ngFor="let product of data?.products">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="product.product_image"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <ion-text>
+              <p>{{product.product_name}}</p>
+              <ion-note>qty: {{product.quantity}}</ion-note>
+            </ion-text>
+          </ion-label>
+          <ion-note slot="end">{{product.total}}</ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

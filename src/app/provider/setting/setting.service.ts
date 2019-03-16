@@ -46,6 +46,7 @@ export class SettingService {
       catchError(this.handleError)
     );
   }
+
   public cities(data: any) {
     this.formData = new FormData();
     if (data.country_id) {
@@ -60,6 +61,18 @@ export class SettingService {
       catchError(this.handleError)
     );
   }
+
+  public banner(id: any) {
+    this.formData = new FormData();
+    this.formData.append('id', id);
+    this.url = `${this.configService.url}common/banners/detail`;
+    return this.http.post<any>(this.url, this.formData).pipe(
+      retry(1), // retry a failed request up to 3 times
+      catchError(this.handleError)
+    );
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
