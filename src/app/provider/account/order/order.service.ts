@@ -8,7 +8,7 @@ import { UserService } from '../user/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class WishlistService {
+export class OrderService {
 
   public formData: FormData = new FormData();
   public responseData: any;
@@ -45,28 +45,8 @@ export class WishlistService {
       this.formData.append('order[0][dir]', data.order[0].dir);
     }
 
-    this.url = `${this.configService.url}customer/customer_wishlists`;
+    this.url = `${this.configService.url}order/orders`;
     return this.http.post<any>(this.url, this.formData).pipe(
-      // retry(1), // retry a failed request up to 3 times
-      catchError(this.handleError)
-    );
-  }
-
-  public add(product_id: any) {
-    this.formData = new FormData();
-
-    this.url = `${this.configService.url}customer/customer_wishlists/save`;
-    this.formData.append('customer_id', this.userService.getId());
-    this.formData.append('product_id', product_id);
-    return this.http.post<any>(this.url, this.formData).pipe(
-      // retry(1), // retry a failed request up to 3 times
-      catchError(this.handleError)
-    );
-  }
-
-  public delete(id: any) {
-    this.url = `${this.configService.url}customer/customer_wishlists/delete/` + id;
-    return this.http.get<any>(this.url).pipe(
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
     );

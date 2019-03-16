@@ -12,6 +12,10 @@ export class CartService {
   public formData: FormData = new FormData();
   public responseData: any;
   private url;
+
+  public orderInfo;
+  public orderAddress;
+
   constructor(public http: HttpClient,
     public configService: ConfigService,
     public userService: UserService) { }
@@ -92,6 +96,34 @@ export class CartService {
   public delete(id: any) {
     this.url = `${this.configService.url}cart/carts/delete/` + id;
     return this.http.get<any>(this.url).pipe(
+      // retry(1), // retry a failed request up to 3 times
+      catchError(this.handleError)
+    );
+  }
+
+
+  public saveOrder(data: any) {
+    this.formData = new FormData();
+    this.url = `${this.configService.url}order/orders/save`;
+    this.formData.append('token', this.userService.getToken());
+    this.formData.append('customer_id', this.userService.getId());
+    this.formData.append('order_type_id', '1');
+
+    this.orderInfo = JSON.parse(localStorage.getItem('order-info'));
+    this.formData.append('name', this.orderInfo.name);
+    this.formData.append('email', this.orderInfo.email);
+    this.formData.append('contact', this.orderInfo.contact);
+    this.orderAddress = JSON.parse(localStorage.getItem('order-address'));
+    this.formData.append('country_id', this.orderAddress.country_id);
+    this.formData.append('zone_id', this.orderAddress.zone_id);
+    this.formData.append('city_id', this.orderAddress.city_id);
+    this.formData.append('postcode', this.orderAddress.postcode);
+    this.formData.append('address', this.orderAddress.address);
+    this.formData.append('comment', data.comment);
+
+
+    this.formData.append('status', '1');
+    return this.http.post<any>(this.url, this.formData).pipe(
       // retry(1), // retry a failed request up to 3 times
       catchError(this.handleError)
     );
