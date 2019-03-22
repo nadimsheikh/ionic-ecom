@@ -37,6 +37,14 @@ export class AccountPage implements OnInit {
     this.router.navigate(['login']);
   }
 
+  goToEditAccount() {
+    this.router.navigate(['reset-account']);
+  }
+
+  goToEditPassword() {
+    this.router.navigate(['reset-password']);
+  }
+
 
   getData(): any {
     this.userService.getStorageData().subscribe(

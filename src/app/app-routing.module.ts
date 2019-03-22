@@ -10,8 +10,6 @@ const routes: Routes = [
   { path: 'register', loadChildren: './account/register/register.module#RegisterPageModule' },
   { path: 'forgot-password', loadChildren: './account/forgot-password/forgot-password.module#ForgotPasswordPageModule' },
   { path: 'reset-password', loadChildren: './account/reset-password/reset-password.module#ResetPasswordPageModule' },
-  { path: 'reset-email', loadChildren: './account/reset-email/reset-email.module#ResetEmailPageModule' },
-  { path: 'reset-contact', loadChildren: './account/reset-contact/reset-contact.module#ResetContactPageModule' },
   { path: 'reset-account', loadChildren: './account/reset-account/reset-account.module#ResetAccountPageModule' },
   { path: 'product-list', loadChildren: './product/product-list/product-list.module#ProductListPageModule' },
   { path: 'product-list/:categoryId', loadChildren: './product/product-list/product-list.module#ProductListPageModule' },
